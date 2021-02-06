@@ -1,0 +1,68 @@
+<div class="container">
+    <mdb-card>
+        <mdb-card-header>Asignaciones</mdb-card-header>
+        <mdb-card-body>
+            <!-- Default form contact -->
+            <form class="text-center border border-light p-5" [formGroup]="formAssignment">
+                <p class="h4 mb-4">Asignar Conductor A Vehiculo</p>
+
+                <div class="row">
+                    <!-- Vehiculo -->
+                    <div class="col-sm-12">
+                        <label>Vehiculo:</label>
+                        <select class="browser-default custom-select mb-2" formControlName="vehicle_id">
+                            <option value="" disabled>Choose option</option>
+                            <option [value]="vehicle.id" *ngFor="let vehicle of vehicles">{{vehicle.type.name}} - {{vehicle.vehicle_plate}} - {{vehicle.brand}} - {{vehicle.owner.first_name}} {{vehicle.owner.last_names}} </option>
+                            </select>
+                    </div>
+
+                    <!-- Proceso -->
+                    <div class="col-sm-6">
+                        <label>Proceso:</label>
+                        <select class="browser-default custom-select mb-2" formControlName="process_id">
+                            <option value="" disabled>Choose option</option>
+                            <option [value]="process.id" *ngFor="let process of processes">{{process.name}}</option>
+                            </select>
+                    </div>
+
+                    <!-- Conductor -->
+                    <div class="col-sm-6">
+                        <label>Conductor:</label>
+                        <select class="browser-default custom-select mb-4" formControlName="driver_id">
+                            <option value="" disabled>Choose option</option>
+                            <option [value]="driver.id" *ngFor="let driver of drivers">{{driver.city.name}} - {{driver.first_name}} {{driver.second_name}} {{driver.last_names}}</option>
+                            </select>
+                    </div>
+
+
+                </div>
+
+
+                <!-- Send button -->
+                <button mdbBtn color="info" block="true" (click)="assignVehicleToDriver(formAssignment.value)"  [disabled]="formAssignment.invalid">Asignar</button>
+            </form>
+            <!-- Default form contact -->
+
+            <table mdbTable striped="true">
+                <thead>
+                    <tr>
+                        <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr mdbTableCol *ngFor="let assignment of assignments">
+                        <td>{{ assignment.id }}</td>
+                        <td>{{ assignment.vehicle.vehicle_plate }}</td>
+                        <td>{{ assignment.vehicle.brand }}</td>
+                        <td>
+                            {{ assignment.driver.first_name }} {{ assignment.driver.second_name }} {{ assignment.driver.last_names }}
+                        </td>
+                        <td>
+                            {{ assignment.vehicle.owner.first_name }} {{ assignment.vehicle.owner.second_name }} {{ assignment.vehicle.owner.last_names }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mdb-card-body>
+    </mdb-card>
+</div>
