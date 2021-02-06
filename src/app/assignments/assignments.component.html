@@ -1,6 +1,6 @@
 <div class="container">
     <mdb-card>
-        <mdb-card-header>Asignaciones</mdb-card-header>
+        <mdb-card-header>ASIGNACIONES</mdb-card-header>
         <mdb-card-body>
             <!-- Default form contact -->
             <form class="text-center border border-light p-5" [formGroup]="formAssignment">
@@ -42,27 +42,32 @@
                 <button mdbBtn color="info" block="true" (click)="assignVehicleToDriver(formAssignment.value)"  [disabled]="formAssignment.invalid">Asignar</button>
             </form>
             <!-- Default form contact -->
+            <center>
+                <p class="h4 mb-4 mt-4">Reporte de Asignaciones</p>
+            </center>
+            <div class="table-responsive border border-light p-5">
+                <table mdbTable striped="true">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let assignment of assignments">
+                            <td>{{ assignment.id }}</td>
+                            <td>{{ assignment.vehicle.vehicle_plate }}</td>
+                            <td>{{ assignment.vehicle.brand }}</td>
+                            <td>
+                                {{ assignment.driver.first_name }} {{ assignment.driver.second_name }} {{ assignment.driver.last_names }}
+                            </td>
+                            <td>
+                                {{ assignment.vehicle.owner.first_name }} {{ assignment.vehicle.owner.second_name }} {{ assignment.vehicle.owner.last_names }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <table mdbTable striped="true">
-                <thead>
-                    <tr>
-                        <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr mdbTableCol *ngFor="let assignment of assignments">
-                        <td>{{ assignment.id }}</td>
-                        <td>{{ assignment.vehicle.vehicle_plate }}</td>
-                        <td>{{ assignment.vehicle.brand }}</td>
-                        <td>
-                            {{ assignment.driver.first_name }} {{ assignment.driver.second_name }} {{ assignment.driver.last_names }}
-                        </td>
-                        <td>
-                            {{ assignment.vehicle.owner.first_name }} {{ assignment.vehicle.owner.second_name }} {{ assignment.vehicle.owner.last_names }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </mdb-card-body>
     </mdb-card>
 </div>

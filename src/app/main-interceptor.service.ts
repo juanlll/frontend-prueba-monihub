@@ -12,14 +12,10 @@ export class MainInterceptorService {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    /* let request = req.clone({
-      setHeaders: {
-        'Accept': 'application/json',
-        'Content-Type' : 'application/json; charset=utf-8'
-      },
-      url: "http://127.0.0.1:8000/" + req.url,
+    let request = req.clone({
+     url: "http://127.0.0.1:8000/" + req.url,
     });
- */
+
     return next.handle(req);
   }
 }
