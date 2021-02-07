@@ -10,14 +10,14 @@
 
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link waves-light" mdbWavesEffect>Asignaciones<span class="sr-only">(current)</span></a>
+                <li class="nav-item" [ngClass]="{ active:router.url == '/'}">
+                    <a class="nav-link waves-light" routerLink="/" mdbWavesEffect>Asignaciones<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-light" mdbWavesEffect>Personas</a>
+                <li class="nav-item" [ngClass]="{ active:router.url == '/persons'}">
+                    <a class="nav-link waves-light" routerLink="/persons" mdbWavesEffect>Personas</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link waves-light" mdbWavesEffect>Vehiculos</a>
+                <li class="nav-item" [ngClass]="{ active:router.url == '/vehicles'}">
+                    <a class="nav-link waves-light" routerLink="/vehicles" mdbWavesEffect>Vehiculos</a>
                 </li>
 
             </ul>

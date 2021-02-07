@@ -86,12 +86,18 @@ export class AssignmentsComponent implements OnInit {
           if(d.data && d.success){
             this.assignments.unshift(d.data);
             this.toastrService.success(d.message);
-          }else{
-            this.toastrService.error(d.message);
           }
         },
         (e) => {
-          console.log(e);
+            console.log(e.error);
+            this.toastrService.error(e.error.message);
+            if(e.error.errors){
+                Object.values(e.error.errors).forEach((msg:any) => {
+                    msg.forEach(element => {
+                        this.toastrService.error(element);
+                    });
+                });
+            }
         }
       );
   }
