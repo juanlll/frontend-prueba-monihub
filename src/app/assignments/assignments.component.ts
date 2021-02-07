@@ -3,6 +3,7 @@ import { FormGroup,FormControl, Validators} from '@angular/forms';
 import { Assignment } from './Assignment';
 import { AssignmentsService } from './assignments.service';
 import { ToastService } from 'ng-uikit-pro-standard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
@@ -17,7 +18,16 @@ export class AssignmentsComponent implements OnInit {
   public drivers: any       = [];
   public formAssignment:FormGroup;
 
-  constructor(private assignmentsService: AssignmentsService,private toastrService: ToastService) { }
+  constructor(private assignmentsService: AssignmentsService,private toastrService: ToastService,public router:Router) {
+    this.router.events.subscribe((path:any )=> {
+        if(path == '/'){
+            this.getAllAssignments();
+            this.getAllVehicles();
+            this.getAllProcesses();
+            this.getAllDrivers();
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.getAllAssignments();

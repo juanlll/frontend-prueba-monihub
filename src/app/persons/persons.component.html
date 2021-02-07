@@ -1,0 +1,110 @@
+<div class="container">
+    <mdb-card>
+        <mdb-card-header>PERSONAS</mdb-card-header>
+        <mdb-card-body>
+            <form class="text-center border border-light p-5" [formGroup]="formPerson">
+                <p class="h4 mb-4">Gestionar Personas</p>
+
+                <div class="form-row">
+                    <div class="col">
+                        <!-- Ciudad -->
+                        <div>
+                            <label>Ciudad:</label>
+                            <select class="browser-default custom-select mb-2" formControlName="city_id" [(ngModel)]="person.city_id">
+                                <option value="" disabled>Choose option</option>
+                                <option
+                                    [value]="city.id"
+                                    *ngFor="let city of cities"
+                                >
+                                    {{ city.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Primer nombre -->
+                        <div>
+                            <label>Primer nombre</label>
+                            <input type="text" [(ngModel)]="person.first_name" class="form-control" mdbInput formControlName="first_name" />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Segundo nombre -->
+                        <div>
+                            <label>Segundo nombre</label>
+                            <input type="text" [(ngModel)]="person.second_name" class="form-control" mdbInput formControlName="second_name" />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Apellidos -->
+                        <div>
+                            <label>Apellidos</label>
+                            <input type="text" [(ngModel)]="person.last_names" class="form-control" mdbInput formControlName="last_names" />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Dirección -->
+                        <div>
+                            <label>Dirección</label>
+                            <input type="text" [(ngModel)]="person.address" class="form-control" mdbInput formControlName="address" />
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Telefono -->
+                        <div>
+                            <label>Telefono</label>
+                            <input type="number " [(ngModel)]="person.phone" class="form-control" mdbInput formControlName="phone" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Send button -->
+                <button mdbBtn color="indigo" block="false" (click)="updatePerson(person)" [disabled]="formPerson.invalid" *ngIf="person.id != null">
+                    guardar
+                </button>
+                <button mdbBtn color="indigo" block="false" (click)="addPerson(person)" [disabled]="formPerson.invalid" *ngIf="person.id == null">
+                    agregar
+                </button>
+                <button mdbBtn color="indigo" block="false" (click)="limpiar()" *ngIf="person.id != null">
+                    limpiar
+                </button>
+            </form>
+            <!-- Default form contact -->
+
+            <p class="h4 mb-4 mt-4 text-center">Listado de Vehiculos</p>
+
+            <div class="table-responsive border border-light p-5">
+                <table mdbTable striped="true ">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let head of headElements" scope="col ">
+                                {{ head }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let person of persons">
+                            <td>{{ person.first_name }}</td>
+                            <td>{{ person.second_name }}</td>
+                            <td>{{ person.last_names }}</td>
+                            <td>{{ person.address }}</td>
+                            <td>{{ person.phone }}</td>
+                            <td>{{ person.city.name }}</td>
+                            <td>
+                                <button mdbBtn type="button" color="primary" mdbWavesEffect size="sm" (click)="showPersonInForm(person)">Editar</button>
+                            </td>
+                            <td>
+                                <button mdbBtn type="button" color="danger" mdbWavesEffect size="sm" (click)="deletePerson(person)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mdb-card-body>
+    </mdb-card>
+</div>
