@@ -1,0 +1,38 @@
+<div class="container">
+    <mdb-card>
+        <mdb-card-header>CAJERO</mdb-card-header>
+        <mdb-card-body>
+            <form class="text-center border border-light p-5" [formGroup]="formCashier">
+                <p class="h4 mb-4">DEPOSITAR O EXTRAER DINERO</p>
+
+                <div class="form-row">
+
+                    <!-- Account Number -->
+                    <div class="col-sm-6">
+                        <label>Numero De Cuenta: {{lengthAccountNumber}}</label>
+                        <input type="text" class="browser-default custom-select mb-4" formControlName="account_number" maxlength="20" minlength="20" />
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <label>Monto:</label>
+                        <input type="number" class="browser-default custom-select mb-4" formControlName="amount" />
+                    </div>
+
+                </div>
+
+                <!-- Send button -->
+                <button mdbBtn color="indigo" block="false" (click)="depositMoney(formCashier.value.account_number,formCashier.value.amount)" [disabled]="formCashier.invalid">
+                    Depositar Dinero
+                </button>
+                <button mdbBtn color="indigo" block="false" (click)="extractMoney(formCashier.value.account_number,formCashier.value.amount)" [disabled]="formCashier.invalid">
+                    Extraer Dinero
+                </button>
+                <button mdbBtn color="indigo" block="false" (click)="limpiar()">
+                    limpiar
+                </button>
+            </form>
+
+        </mdb-card-body>
+    </mdb-card>
+</div>
