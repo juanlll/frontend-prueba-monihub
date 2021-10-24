@@ -13,7 +13,7 @@ export class MainInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let request = req.clone({
-     url: "http://127.0.0.1:8000/" + req.url,
+     url: "http://bank.test" + req.url,
     });
 
     return next.handle(req);

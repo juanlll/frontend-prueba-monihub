@@ -1,0 +1,128 @@
+<div class="container">
+    <mdb-card>
+        <mdb-card-header>ASESOR</mdb-card-header>
+        <mdb-card-body>
+            <!-- Default form contact -->
+            <form class="text-center border border-light p-5" [formGroup]="formBankAccount">
+                <p class="h4 mb-4">Crear Cuenta Bancaria</p>
+
+                <div class="row">
+                    <!-- Currency Type -->
+                    <div class="col-sm-4">
+                        <label>Tipo De Moneda:</label>
+                        <select class="browser-default custom-select mb-2" formControlName="account_currency">
+                            <option value="" disabled>Seleccionar moneda</option>
+                            <option *ngFor="let currency of currencies" [value]="currency">{{currency}}</option>
+                            </select>
+                    </div>
+
+                    <!-- Bank -->
+                    <div class="col-sm-4">
+                        <label>Banco:</label>
+                        <select class="browser-default custom-select mb-2" formControlName="bank_name">
+                            <option value="" disabled>Seleccionar banco</option>
+                            <option *ngFor="let bank of banks" [value]="bank" >{{bank}}</option>
+                            </select>
+                    </div>
+
+                    <!-- Account Number -->
+                    <div class="col-sm-4">
+                        <label>Numero De Cuenta: {{lengthAccountNumber}}</label>
+                        <input type="text" class="browser-default custom-select mb-4" formControlName="account_number" maxlength="20" minlength="20" />
+                    </div>
+
+                    <!-- Account Name -->
+                    <div class="col-sm-4">
+                        <label>Nombre De Cuenta:</label>
+                        <input type="text" class="browser-default custom-select mb-4" formControlName="account_name" maxlength="50" />
+                    </div>
+
+                    <!-- Account Initial Balance -->
+                    <div class="col-sm-4">
+                        <label>Monto Inicial:</label>
+                        <input type="number" class="browser-default custom-select mb-4" formControlName="initial_account_balance" />
+                    </div>
+
+                    <!-- Status -->
+                    <div class="col-sm-4">
+                        <label>Estado:</label>
+                        <select class="browser-default custom-select mb-2" formControlName="status">
+                            <option value="" disabled>Seleccionar banco</option>
+                            <option *ngFor="let status of list_status" [value]="status.value" >{{status.name}}</option>
+                            </select>
+                    </div>
+                </div>
+
+
+                <!-- Send button -->
+                <button mdbBtn color="info" block="true" (click)="createBankAccount(formBankAccount.value)"  [disabled]="formBankAccount.invalid">Crear</button>
+            </form>
+            <!-- Default form contact -->
+
+            <p class="h4 mb-4 mt-4">Reporte de Asignaciones</p>
+
+            <div class="table-responsive border border-light p-5">
+                <table mdbTable striped="true">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr mdbTableCol *ngFor="let bankAcc of bankAccounts">
+                            <td>{{ bankAcc.id }} </td>
+                            <td>{{ bankAcc.account_number }}</td>
+                            <td>{{ bankAcc.account_name }}</td>
+                            <td>{{ bankAcc.bank_name }}</td>
+                            <td>{{ bankAcc.account_currency }}</td>
+                            <td>{{ bankAcc.initial_account_balance }}</td>
+                            <td>{{ bankAcc.status ? 'Activa': 'Inactiva' }}</td>
+                            <td><button type="button" mdbBtn color="primary" class="relative waves-light" (click)="getBankAccount(bankAcc.account_number);basicModal.show()" mdbWavesEffect>Ver Detalle</button >
+                                <div mdbModal #basicModal="mdbModal" class="modal right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                                   aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-full-height modal-right" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                <h4 class="modal-title w-100" id="myModalLabel">Movimientos Bancarios</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngIf="movements.length > 0" style="
+                    text-align: center;
+                        font-weight: bold;
+                        font-size: 20px;
+                        background: #ffc107;">{{ bankAccount.bank_name}}<br>Saldo Disponible: {{ formatMoney(movements[0].current_money,bankAccount.account_currency)}} {{bankAccount.account_currency}}</li>
+
+                </ul>
+
+                <div class="list-group">
+                    <li class="list-group-item">Ultimo 10 Movimientos:</li>
+                    <a *ngFor="let mov of movements" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{presentSymbol(mov.type)}} {{formatMoney(mov.amount,bankAccount.account_currency)}} {{bankAccount.account_currency}}</h5>
+                            <small>{{mov.type}}</small>
+
+                        </div>
+                        <!--  <p class="mb-1">{{mov.created_at}}</p> -->
+                        <small>{{mov.created_at}}</small>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+            </div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</mdb-card-body>
+</mdb-card>
+</div>
