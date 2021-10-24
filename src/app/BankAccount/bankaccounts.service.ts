@@ -19,14 +19,25 @@ export class  BankAccountService {
     return this.http.get('api/bank-accounts/'+id);
   }
 
+
   public createBankAccount(bank_account:BankAccount) {
     return this.http.post('api/bank-accounts',bank_account);
   }
 
-/*   public getDrivers() {
-    return this.http.get('api/persons');
+  public depositMoney(account_number,amount) {
+    return this.http.post('api/deposit-money',{
+        account_number,
+        amount
+    });
   }
- */
+
+  public extractMoney(account_number,amount) {
+    return this.http.post('api/extract-money',{
+        account_number,
+        amount
+    });
+  }
+
   public getBanks() {
     return this.http.get('api/banks');
   }

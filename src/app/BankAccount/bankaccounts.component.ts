@@ -140,6 +140,7 @@ export class BankAccountComponent implements OnInit {
           if(d.data && d.success){
             this.bankAccounts.unshift(d.data);
             this.toastrService.success(d.message);
+            this.formBankAccount.reset();
           }
         },
         (e) => {
